@@ -233,7 +233,7 @@ const factory = (ProgressBar, Input) => {
     }
 
     renderPoints () {
-      if(this.points.length) {
+      if(this.props.points.length) {
         return (
           <div ref='points' className={this.props.theme.snaps}>
             {this.props.points.map(i => {
