@@ -19,6 +19,7 @@ const factory = (ProgressBar, Input) => {
       onChange: PropTypes.func,
       pinned: PropTypes.bool,
       snaps: PropTypes.bool,
+      points: PropTypes.array,
       step: PropTypes.number,
       theme: PropTypes.shape({
         container: PropTypes.string,
@@ -46,7 +47,8 @@ const factory = (ProgressBar, Input) => {
       pinned: false,
       snaps: false,
       step: 0.01,
-      value: 0
+      value: 0,
+      points: []
     };
 
     state = {
@@ -230,6 +232,18 @@ const factory = (ProgressBar, Input) => {
       }
     }
 
+    renderPoints () {
+      if(this.points.length) {
+        return (
+          <div ref='points' className={this.props.theme.snaps}>
+            {this.props.points.map(i => {
+              return <div key={`span-${i}`} className={this.props.theme.snap} />;
+            })}
+          </div>
+        )
+      }
+    }
+
     renderInput () {
       if (this.props.editable) {
         const value = this.state.inputFocused ? this.state.inputValue : this.valueForInput(this.props.value);
@@ -290,9 +304,9 @@ const factory = (ProgressBar, Input) => {
                 value={this.props.value}
                 />
               {this.renderSnaps()}
+              {this.renderPoints()}
             </div>
           </div>
-
           {this.renderInput()}
         </div>
       );
