@@ -20,6 +20,7 @@ const factory = (ProgressBar, Input) => {
       pinned: PropTypes.bool,
       snaps: PropTypes.bool,
       points: PropTypes.array,
+      pointSnap: PropTypes.number,
       step: PropTypes.number,
       theme: PropTypes.shape({
         container: PropTypes.string,
@@ -48,7 +49,8 @@ const factory = (ProgressBar, Input) => {
       snaps: false,
       step: 0.01,
       value: 0,
-      points: []
+      points: [],
+      pointSnap:2
     };
 
     state = {
@@ -195,7 +197,15 @@ const factory = (ProgressBar, Input) => {
     positionToValue (position) {
       const { sliderStart: start, sliderLength: length } = this.state;
       const { max, min } = this.props;
-      return this.trimValue((position.x - start) / length * (max - min) + min);
+      let val = this.trimValue((position.x - start) / length * (max - min) + min);
+      if(this.props.points.length){
+        this.props.points.forEach(p => {
+          if(Math.abs(val - p) <= this.props.pointSnap){
+            val = p;
+          }
+        })
+      }
+      return val;
     }
 
     valueToPosition(value){
