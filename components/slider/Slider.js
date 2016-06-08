@@ -243,7 +243,7 @@ const factory = (ProgressBar, Input) => {
         return (
           <div ref='points' className={this.props.theme.points}>
             {this.props.points.map(i => {
-              return <div key={`span-${i}`} style={{left:valueToPosition(i)+'px'}} className={this.props.theme.point} />;
+              return <div key={`span-${i}`} style={{left:this.valueToPosition(i)+'px'}} className={this.props.theme.point} />;
             })}
           </div>
         )
