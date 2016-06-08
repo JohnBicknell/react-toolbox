@@ -61,6 +61,7 @@
   }
 }
 
+
 .snap {
   flex: 1;
   &:after {
@@ -71,6 +72,34 @@
     background-color: $slider-snap-color;
     border-radius: 50%;
   }
+}
+
+.points {
+  position: absolute;
+  top: $slider-knob-size / 2 - $slider-snap-size / 2;
+  left: 0;
+  width: calc(100% + #{$slider-snap-size});
+  height: $slider-snap-size;
+  flex-direction: row;
+  pointer-events: none;
+  &:after {
+    display: block;
+    width: $slider-snap-size;
+    height: $slider-snap-size;
+    content: "";
+    background-color: $slider-snap-color;
+    border-radius: 50%;
+  }
+}
+
+.point {
+    position: absolute;
+    display: block;
+    width: $slider-snap-size;
+    height: $slider-snap-size;
+    content: "";
+    background-color: $slider-snap-color;
+    border-radius: 50%;
 }
 
 .input {

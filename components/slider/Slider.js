@@ -198,6 +198,12 @@ const factory = (ProgressBar, Input) => {
       return this.trimValue((position.x - start) / length * (max - min) + min);
     }
 
+    valueToPosition(value){
+      const { sliderStart: start, sliderLength: length } = this.state;
+      const { max, min } = this.props;
+      return (sliderLength / (max-min)) * (value - min);
+    }
+
     start (position) {
       this.handleResize(null, () => {
         this.setState({pressed: true});
@@ -225,7 +231,7 @@ const factory = (ProgressBar, Input) => {
         return (
           <div ref='snaps' className={this.props.theme.snaps}>
             {utils.range(0, (this.props.max - this.props.min) / this.props.step).map(i => {
-              return <div key={`span-${i}`} className={this.props.theme.snap} />;
+              return <div key={`span-${i}`}  className={this.props.theme.snap} />;
             })}
           </div>
         );
@@ -235,9 +241,9 @@ const factory = (ProgressBar, Input) => {
     renderPoints () {
       if(this.props.points.length) {
         return (
-          <div ref='points' className={this.props.theme.snaps}>
+          <div ref='points' className={this.props.theme.points}>
             {this.props.points.map(i => {
-              return <div key={`span-${i}`} className={this.props.theme.snap} />;
+              return <div key={`span-${i}`} style={{left:valueToPosition(i)+'px'}} className={this.props.theme.point} />;
             })}
           </div>
         )
