@@ -40,8 +40,17 @@ class Slider extends React.Component {
   };
 
   componentDidMount () {
-    window.addEventListener('resize', this.handleResize);
-    this.handleResize();
+      window.addEventListener('resize', this.handleResize);
+
+      //componentDidMount executes before the browser has layed out everything
+      //the combination of settimeout and requestAnimationFrame is the only
+      //sure way I've found so far of making sure browser has done laying out
+      //and dimensions can be relied on
+      setTimeout(() => {
+          window.requestAnimationFrame(() => {
+              this.handleResize();
+          })
+      }, 0);
   }
 
   shouldComponentUpdate (nextProps, nextState) {
