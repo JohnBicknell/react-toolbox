@@ -1,64 +1,58 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import classnames from 'classnames';
-import { themr } from 'react-css-themr';
-import { SLIDER } from '../identifiers.js';
-import events from '../utils/events.js';
-import prefixer from '../utils/prefixer.js';
-import utils from '../utils/utils.js';
-import InjectProgressBar from '../progress_bar/ProgressBar.js';
-import InjectInput from '../input/Input.js';
+import ClassNames from 'classnames';
+import style from './style';
+import events from '../utils/events';
+import prefixer from '../utils/prefixer';
+import utils from '../utils/utils';
+import ProgressBar from '../progress_bar';
+import Input from '../input';
 
-const factory = (ProgressBar, Input) => {
-  class Slider extends Component {
-    static propTypes = {
-      className: PropTypes.string,
-      editable: PropTypes.bool,
-      max: PropTypes.number,
-      min: PropTypes.number,
-      onChange: PropTypes.func,
-      pinned: PropTypes.bool,
-      snaps: PropTypes.bool,
-      points: PropTypes.array,
-      pointSnap: PropTypes.number,
-      step: PropTypes.number,
-      theme: PropTypes.shape({
-        container: PropTypes.string,
-        editable: PropTypes.string,
-        innerknob: PropTypes.string,
-        innerprogress: PropTypes.string,
-        input: PropTypes.string,
-        knob: PropTypes.string,
-        pinned: PropTypes.string,
-        pressed: PropTypes.string,
-        progress: PropTypes.string,
-        ring: PropTypes.string,
-        slider: PropTypes.string,
-        snap: PropTypes.string,
-        snaps: PropTypes.string
-      }),
-      value: PropTypes.number
-    };
+class Slider extends React.Component {
+  static propTypes = {
+    className: React.PropTypes.string,
+    editable: React.PropTypes.bool,
+    max: React.PropTypes.number,
+    min: React.PropTypes.number,
+    onChange: React.PropTypes.func,
+    pinned: React.PropTypes.bool,
+    snaps: React.PropTypes.bool,
+    step: React.PropTypes.number,
+    value: React.PropTypes.number
+  };
 
-    static defaultProps = {
-      className: '',
-      editable: false,
-      max: 100,
-      min: 0,
-      pinned: false,
-      snaps: false,
-      step: 0.01,
-      value: 0,
-      points: [],
-      pointSnap:2
-    };
+  static defaultProps = {
+    className: '',
+    editable: false,
+    max: 100,
+    min: 0,
+    pinned: false,
+    snaps: false,
+    step: 0.01,
+    value: 0
+  };
 
-    state = {
-      inputFocused: false,
-      inputValue: null,
-      sliderLength: 0,
-      sliderStart: 0
-    };
+  state = {
+    inputFocused: false,
+    inputValue: null,
+    sliderLength: 0,
+    sliderStart: 0
+  };
+
+  componentDidMount () {
+      window.addEventListener('resize', this.handleResize);
+
+      //componentDidMount executes before the browser has layed out everything
+      //the combination of settimeout and requestAnimationFrame is the only
+      //sure way I've found so far of making sure browser has done laying out
+      //and dimensions can be relied on
+      setTimeout(() => {
+          window.requestAnimationFrame(() => {
+              this.handleResize();
+          })
+      }, 0);
+  }
+
 
     componentDidMount () {
       window.addEventListener('resize', this.handleResize);
