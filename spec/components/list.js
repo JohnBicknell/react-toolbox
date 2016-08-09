@@ -1,8 +1,8 @@
 import React from 'react';
 import { ListCheckbox, ListSubHeader, List, ListItem, ListDivider, ListItemText, ListItemContent } from '../../components/list';
+import { Button } from '../../components/button';
 import Avatar from '../../components/avatar';
 import FontIcon from '../../components/font_icon';
-import {Button} from '../../components/button';
 
 const listStyle = {
   border: '1px solid #EEE',
@@ -62,7 +62,7 @@ class ListTest extends React.Component {
               rightIcon='star'
             />
             <ListItem
-              avatar='https://pbs.twimg.com/profile_images/477103691506282499/bsIaPEiM_400x400.jpeg'
+              avatar='https://pbs.twimg.com/profile_images/755797598565531649/Whsf9259.jpg'
               caption='Tobias Van Schneider'
               legend='Designer at Spotify'
               rightIcon='star'
@@ -122,7 +122,7 @@ class ListTest extends React.Component {
               rightIcon='mail'
             />
             <ListItem
-              avatar='https://pbs.twimg.com/profile_images/477103691506282499/bsIaPEiM_400x400.jpeg'
+              avatar='https://pbs.twimg.com/profile_images/755797598565531649/Whsf9259.jpg'
               caption='Tobias Van Schneider'
               rightIcon='mail'
             />

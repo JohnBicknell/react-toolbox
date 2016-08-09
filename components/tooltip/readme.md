@@ -1,6 +1,6 @@
 # Tooltip
 
-A Tooltip is useful to show information on hover in any kind of component. We have a component that can be used as a **decorator** for any kind of component. You just have to take into account that the overflow in the component should be visible.
+A Tooltip is useful to show information on hover in any kind of component. We have a component that can be used as a **decorator** for any kind of component. Also, it's factory function is exposed so you can create your own decorator with specific properties.
 
 <!-- example -->
 ```jsx
@@ -22,6 +22,8 @@ const TooltipTest = () => (
 );
 ```
 
+This component can be styled by context providing a theme with the key `RTTooltip` through the theme provider.
+
 ## Properties
 
 In any component you decorate with the Tooltip you'd get some additional props:
@@ -35,3 +37,16 @@ In any component you decorate with the Tooltip you'd get some additional props:
 | `tooltip`             | `String`      |               | The text string to use for the tooltip.|
 | `tooltipDelay`        | `Number`      |               | Amount of time in miliseconds spent before the tooltip is visible.|
 | `tooltipHideOnClick`  | `Boolean`     | `true`        | If true, the Tooltip hides after a click in the host component.|
+| `tooltipPosition`     | `String`      | `vertical`    | Determines the position of the tooltip. It can be automatic with `vertical` and `horizontal` values or forced with `bottom`, `top`, `left` or `right`.|
+
+## Theming
+
+| Name     | Description|
+|:---------|:-----------|
+| `tooltip` | Added to the tooltip element wrapper.|
+| `tooltipActive` | Added to the root when the tooltip is active.|
+| `tooltipBottom` | Added to the root in case the tooltip is being positioned at bottom.|
+| `tooltipInner` | Added to the inner element which sets the background, font and rounded borders.|
+| `tooltipLeft` | Added to the root in case the tooltip is being positioned at left.|
+| `tooltipRight` | Added to the root in case the tooltip is being positioned at right.|
+| `tooltipTop` | Added to the root in case the tooltip is being positioned at top.|

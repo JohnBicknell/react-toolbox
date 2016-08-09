@@ -1,4 +1,6 @@
-@import "../components/commons";
+@import "../components/colors";
+@import "../components/globals";
+@import "../components/mixins";
 @import "../components/app_bar/config";
 @import "../components/button/config";
 
@@ -136,4 +138,11 @@ $offset: 1.8 * $unit;
   display: flex;
   flex-direction: column;
   flex-grow: 2;
+}
+
+.customSizedProgress {
+  &.circular {
+    width: 40px;
+    height: 40px;
+  }
 }

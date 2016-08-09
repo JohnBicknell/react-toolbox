@@ -27,6 +27,8 @@ class InputTest extends React.Component {
 }
 ```
 
+If you want to provide a theme via context, the component key is `RTInput`.
+
 ## Properties
 
 | Name            | Type                    | Default         | Description|
@@ -48,9 +50,27 @@ class InputTest extends React.Component {
 | `type`          | `String`                | `text`          | Type of the input element. It can be a valid HTML5 input type|
 | `value`         | `Any`                   |                 | Current value of the input element.|
 
+## Theming
+
+| Name       | Description|
+|:-----------|:-----------|
+| `bar`     | Used for the bar under the input.|
+| `counter` | Used for the counter element.|
+| `disabled` | Added to the root class when input is disabled.|
+| `error` | Used for the text error.|
+| `errored` | Added to the root class when input is errored.|
+| `hidden` | Used when the input is hidden.|
+| `hint` | Used for the hint text.|
+| `icon`   | Used for the icon in case the input has icon.|
+| `input` | Used as root class for the component.|
+| `inputElement` | Used for the HTML input element.|
+| `label` | Used for the label when the input has a label.|
+| `required` | Used in case the input is required.|
+| `withIcon` | Added to the root class if the input has icon.|
+
 ## Methods
 
-The input is stateless but it includes two methods to be able to communicate with the DOM input node:
+The `Input` component has some imperative methods that are used as a bypass to the native rendered DOM element. To call this methods you will need to retrieve the instance of the component. Check the [Install](http://react-toolbox.com/#/install) section for details on how to do this. The methods included for the `Input` are:
 
-- `blur` to blur the input field.
-- `focus` to focus the input field.
+- `blur` used to blur the `input` element.
+- `focus` used to focus the `input` element.

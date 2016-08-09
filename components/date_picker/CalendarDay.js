@@ -1,21 +1,27 @@
-import React from 'react';
-import ClassNames from 'classnames';
-import time from '../utils/time';
-import style from './style.calendar';
+import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
+import time from '../utils/time.js';
 
-class Day extends React.Component {
+class Day extends Component {
   static propTypes = {
-    day: React.PropTypes.number,
-    disabled: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    selectedDate: React.PropTypes.object,
-    viewDate: React.PropTypes.object
+    day: PropTypes.number,
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
+    selectedDate: PropTypes.object,
+    sundayFirstDayOfWeek: PropTypes.bool,
+    theme: PropTypes.shape({
+      active: PropTypes.string,
+      day: PropTypes.string,
+      disabled: PropTypes.string
+    }),
+    viewDate: PropTypes.object
   };
 
   dayStyle () {
     if (this.props.day === 1) {
+      const e = (this.props.sundayFirstDayOfWeek) ? 0 : 1;
       return {
-        marginLeft: `${time.getFirstWeekDay(this.props.viewDate) * 100 / 7}%`
+        marginLeft: `${(time.getFirstWeekDay(this.props.viewDate) - e) * 100 / 7}%`
       };
     }
   }
@@ -27,15 +33,21 @@ class Day extends React.Component {
     return sameYear && sameMonth && sameDay;
   }
 
+  handleClick = () => {
+    if (!this.props.disabled && this.props.onClick) {
+      this.props.onClick(this.props.day);
+    }
+  };
+
   render () {
-    const className = ClassNames(style.day, {
-      [style.active]: this.isSelected(),
-      [style.disabled]: this.props.disabled
+    const className = classnames(this.props.theme.day, {
+      [this.props.theme.active]: this.isSelected(),
+      [this.props.theme.disabled]: this.props.disabled
     });
 
     return (
       <div data-react-toolbox='day' className={className} style={this.dayStyle()}>
-        <span onClick={this.props.onClick}>
+        <span onClick={this.handleClick}>
           {this.props.day}
         </span>
       </div>
