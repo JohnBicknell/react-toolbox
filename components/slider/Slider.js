@@ -58,7 +58,16 @@ const factory = (ProgressBar, Input) => {
 
     componentDidMount () {
       window.addEventListener('resize', this.handleResize);
-      this.handleResize();
+
+      //componentDidMount executes before browser has layed out so use requestAnimationFrame
+      //to ensure component has scaled correctly in the browsers layout
+      //requestAnimationFrame doesn't always work, wrapping in set timeout seems the only way'
+      setTimeout(() => {
+          window.requestAnimationFrame(() => {
+            this.handleResize();
+          })
+      }, 0);
+      
     }
 
     componentWillReceiveProps (nextProps) {
